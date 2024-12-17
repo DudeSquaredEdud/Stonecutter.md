@@ -1,0 +1,36 @@
+*{
+    font-family:Arial, Helvetica, sans-serif;
+  }
+  *:focus{
+    outline: none;
+  }
+
+  h1{
+    margin-top: 0px;
+    color: #000000;
+    text-align: center;
+  }
+
+  header{
+    background-color: rgb(241, 241, 241);
+    height:fit-content;
+    width:auto;
+    padding: 10px;
+  }
+
+  .entryNum{
+    text-align: center;
+    color: #5d5d5d;
+    font-style: italic;
+  }
+
+  footer{
+    position: absolute;
+    bottom:0%;
+    font-size: small;
+    font-style: bold;
+    text-align: right;
+    background-color: #f0f0f0;
+    width: 100vw;
+    z-index: 1000;
+  }

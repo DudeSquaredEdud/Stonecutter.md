@@ -1,24 +1,18 @@
-<style>
-
-  h1{
-    color: #000000;
-    font-family:Arial, Helvetica, sans-serif;
-    text-align: center;
-  }
-
-  header{
-    background-color: rgb(241, 241, 241);
-    height:fit-content;
-    width:auto;
-    padding: 10px;
-  }
-</style>
-
 <main class="main">
   <header>
-    <h1 id="postTitle" contenteditable="true">{{title}}</h1>
+    <div class="entryNum">{{entry_number}}</div>
+    <h1 id="postTitle" spellcheck="false" contenteditable="true">{{title}}</h1>
   </header>
+  <section id="SECTION_CONTAINER">
+    @for (i of sections; track i.id){
+      <app-section />
+    }
+  </section>
 
+
+  <footer>
+    <p style="padding-right: 10px;">Made by Ashton Andrepont, 2024</p>
+  </footer>
 </main>
 
 <router-outlet />
