@@ -36,7 +36,13 @@ h2{
     padding-left: 2px;
   }
 
-  .delete{
-    text-align: right;
-    font-weight: 800;
+  section.deleted{
+    background-color: rgb(202, 202, 202);
+    h2{
+      color: #727272;
+      font-style: italic;
+    }
+  .contentText{
+    color: #646464;
+  }
   }

@@ -11,8 +11,8 @@ import { FootnotesComponent } from './footnotes/footnotes.component';
 })
 export class AppComponent {
   // Title & footnotes
-  title = 'Stonecutter.md';
-  entry_number = "0005";
+  title = 'Stonecutter.md, Part 2';
+  entry_number = "0006";
   footnotes = new FootnotesComponent();
 
   // Sections
@@ -22,7 +22,7 @@ export class AppComponent {
   childSectionsSignal = viewChildren(SectionComponent);
   childSections = computed(() => {
     let sections: {id: number, sect: SectionComponent}[] = [];
-    let id: number = 1;
+    let id: number = this.section_count;
     this.childSectionsSignal().forEach((childSection: SectionComponent) => {
       sections.push({id: id, sect: childSection});
       id++;
@@ -43,25 +43,16 @@ export class AppComponent {
   // Delete a section
   @HostListener('document:keydown.control.delete', ['$event'])
   delete_section(event: KeyboardEvent){
-    if (typeof this.selected_section == "string"){
-      let target_id = this.selected_section;
-      this.section_count_range = this.section_count_range.filter(function(item) {
-        let target_section = document.querySelectorAll('section[sec_id="'+target_id+'"]');
-        target_section.forEach((thing) => {thing.remove()})
-        return item.toString() != target_id;
-      }) 
-      this.section_count--;
-      let new_id = 1;
-      this.childSections();
-      this.childSections().forEach(element => {
-          element.id = new_id;
-          element.sect.unique_id = new_id;
-          console.log(element.id + " " + element.sect.unique_id);
-          new_id++;  
+    let target_section = document.querySelectorAll('section[sec_id="'+this.selected_section+'"]');
+     target_section.forEach(target => {
+      if (target.classList.contains("deleted")){
+        target.classList.remove("deleted");
+      }
+      else{
+        target.classList.add("deleted");
+      }
+      
       });
-        console.log("Deleted Section");  
-    }
-      this.selected_section = null;
   }
 
   // Find what the current section is
