@@ -1,5 +1,5 @@
-<section>
-    <h2 id="postTitle" spellcheck="false" contenteditable="true">{{section_title}}</h2>
-    <div class="date">{{section_date}}</div>
-    <p class="contentText" contenteditable="true">{{section_textcontent}}</p>
+<section [attr.sec_id]="unique_id">
+    <h2 [attr.sec_id]="unique_id" spellcheck="false" contenteditable="true">{{section_title}}</h2>
+    <div [attr.sec_id]="unique_id" class="date">{{section_date}}</div>
+    <p [attr.sec_id]="unique_id" class="contentText" contenteditable="true">{{section_textcontent}}</p>
 </section>

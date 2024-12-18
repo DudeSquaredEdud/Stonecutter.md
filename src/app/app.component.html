@@ -4,14 +4,14 @@
     <h1 id="postTitle" spellcheck="false" contenteditable="true">{{title}}</h1>
   </header>
   <section id="SECTION_CONTAINER">
-    @for (i of sections; track i.id){
-      <app-section />
+    @for (i of section_count_range; track i){
+      <app-section [unique_id]="i" />
     }
   </section>
-
-
+  <app-footnotes />
   <footer>
-    <p style="padding-right: 10px;">Made by Ashton Andrepont, 2024</p>
+    <p style="padding-left: 10px;">Ctrl+Enter for a new section</p>
+    <p class="right" style="padding-right: 10px;">Made by Ashton Andrepont, 2024</p>
   </footer>
 </main>
 

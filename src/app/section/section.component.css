@@ -26,6 +26,7 @@ h2{
   .contentText{
     color: #353637;
     margin-left: 10px;
+    margin-right: 10px;
   }
 
   .date{
@@ -33,4 +34,9 @@ h2{
     margin: none;
     padding: none;
     padding-left: 2px;
+  }
+
+  .delete{
+    text-align: right;
+    font-weight: 800;
   }
