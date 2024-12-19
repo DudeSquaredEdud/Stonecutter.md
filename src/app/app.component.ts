@@ -1,4 +1,4 @@
-import { Component, computed, HostBinding, HostListener, viewChildren } from '@angular/core';
+import { Component, computed, HostBinding, HostListener, viewChildren, ChangeDetectorRef, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SectionComponent } from './section/section.component';
 import { FootnotesComponent } from './footnotes/footnotes.component';
@@ -13,7 +13,6 @@ export class AppComponent {
   // Title & footnotes
   title = 'Stonecutter.md, Part 2';
   entry_number = "0006";
-  footnotes = new FootnotesComponent();
 
   // Sections
   section_count = 1;
@@ -29,6 +28,8 @@ export class AppComponent {
     })
     return sections;
   });
+
+  childFootnoteSignal = viewChild(FootnotesComponent);
 
   selected_section: string | null = "0";
 
@@ -64,20 +65,54 @@ export class AppComponent {
      }
   }
 
+  // Footnote generation
+  @HostListener('document:keyup.code.BracketRight', ['$event'])
   collectFootnotes(){
-    // future ashton: this is broken.
-    // footnotes: [""];
-    // for (let i=0; i < this.childSections.length; i++){
-    //   this.childSections.array.forEach(element => {
-    //     element.getFootnoteCount();
-    //   });
-    // }
-    // This gets called every few seconds
-    // getFootnoteCount from all sections
-
-      // Ah frick, how do I reference the sections?
-
+    let document_footnotes: string[]=[];
+    let section_footnotes = [];
+    for (let i=0; i < this.childSections().length; i++){
+      this.childSections().forEach(element => {
+        section_footnotes = element.sect.getFootnoteCount();
+        // Ugh.
+        section_footnotes.forEach(fakeElement => {
+          fakeElement.forEach(actualElement => {
+            if(!document_footnotes.includes(actualElement)){
+              document_footnotes.push(actualElement);
+            }
+          })
+        })
+      });
+    }
     // create a list without duplicates
-    // send to updateFootnotes()  
+    this.childFootnoteSignal()?.updateFootnotes(document_footnotes);
   }
+
+
+  @HostListener('document:keydown.control.s', ['$event'])
+  export_text(e: any){
+    e.preventDefault();
+    let section_texts = "";
+    this.childSections().forEach(element => {
+      section_texts = section_texts.concat(`***${element.sect.getTitle()}*** ${element.sect.section_date}\n\n${element.sect.getText()}\n\n`);
+      } 
+    );
+
+
+
+    let footnote_text = "";
+    this.childFootnoteSignal()?.getText().forEach(element => {
+      footnote_text = footnote_text.concat(`#### Fn ${element.id}: ${element.content}\n\n`);
+      } 
+    );
+
+    console.log(
+      `## ${this.entry_number}: ${this.title}\n---\n`
+      +"\n"+
+      section_texts
+      +"\n"+
+      "### Footnotes"
+      +"\n"+
+      footnote_text
+    )
+    }
 }

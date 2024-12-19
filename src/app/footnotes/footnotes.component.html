@@ -1,17 +1,20 @@
-<section>
+<section id="footnotes">
     <h2>Footnotes</h2>
-    <!-- If it's not "empty"... -->
-    @if (notes.length != 1){
-        <!-- ...for every note, if it's not the empty note... -->
-        @for (note of notes; track note.id){
-            @if (note.id != 0) {
-                <!-- ...make an editable footnote. -->
-                <p class="contentText" contenteditable="true">{{note.content}}</p>
+        <div>
+            <!-- If it's not "empty"... -->
+            @if (notes.length != 0){
+                <!-- ...for every note... -->
+                @for (note of notes; track note.id){
+                    <!-- ...make an editable footnote. -->
+                     <div class="footnoteBinder">
+                         <p class="contentText footnoteMarker" [attr.fnid]="note.id">[{{note.id}}]: </p>
+                         <p class="contentText footnoteText" contenteditable="true" [attr.fnid]="note.id">{{note.content}}</p>
+                     </div>
+                }
             }
-        }
-    }
-    <!-- Otherwise, display this text. -->
-    @else {
-        <p style="font-style: italic;">Nothing yet...</p>
-    }
+            <!-- Otherwise, display this text. -->
+            @else {
+                <p style="font-style: italic;">Nothing yet...</p>
+            }
+        </div>
     </section>

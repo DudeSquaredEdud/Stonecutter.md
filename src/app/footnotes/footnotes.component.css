@@ -27,6 +27,8 @@ section{
   color: #353637;
   margin-left: 10px;
   margin-right: 10px;
+  margin-top: 0px;
+  padding: 2px;
 }
 
 .date{
@@ -34,4 +36,23 @@ section{
   margin: none;
   padding: none;
   padding-left: 2px;
+}
+
+textarea {
+  border: none;
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  padding: none;
+  width: 100%;
+  background-color: rgb(248, 248, 248);
+}
+
+.footnoteMarker{
+  width: min-content;
+  margin-right: 0px;
+}
+
+.footnoteBinder{
+  display:flex;
 }

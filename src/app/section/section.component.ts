@@ -20,13 +20,27 @@ export class SectionComponent{
   }
 
   getFootnoteCount() {
+    this.updateText();
     // put a regex find for every [n] in the text
-    let re = new RegExp("\[[0-9]+\]");
+    let re = new RegExp("\[[0-9]+\]", "g");
     // return the [n]'s in there as a list.
-    return this.section_textcontent.matchAll(re);
+    let regexMatches = [...this.section_textcontent.matchAll(re)];
+    
+    return regexMatches;
   }
 
-  // setId(new_id: number) {
-  //   this.unique_id.arguments = new_id;
-  // }
+  updateText(){
+    this.section_title = document.querySelectorAll("h2[sec_id=\""+this.unique_id+"\"]")[0].innerHTML;
+    this.section_textcontent = document.querySelectorAll("p.contentText[sec_id=\""+this.unique_id+"\"]")[0].innerHTML;
+  }
+
+  getTitle(){
+    this.updateText()
+    return this.section_title;
+  }
+
+  getText(){
+    this.updateText()
+    return this.section_textcontent;
+  }
 }
