@@ -17,7 +17,7 @@ export class FootnotesComponent {
       is_present = is_present || (element.id == Number(note_id))
     })
     if (!is_present){
-      this.notes.push({id: Number(note_id), content: ""});
+      this.notes.push({id: Number(note_id), content: " "});
     }
     setTimeout(() => {
       let on_page_note: HTMLInputElement = <HTMLInputElement>document.querySelector("p.footnoteText[fnid=\"" + note_id + "\"]");

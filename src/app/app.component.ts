@@ -92,16 +92,16 @@ export class AppComponent {
   export_text(e: any){
     e.preventDefault();
     let section_texts = "";
+    let re = new RegExp("(\[[0-9]+\])", "g");
     this.childSections().forEach(element => {
-      section_texts = section_texts.concat(`***${element.sect.getTitle()}*** ${element.sect.section_date}\n\n${element.sect.getText()}\n\n`);
+      // this is an abomination. 
+      section_texts = section_texts.concat(`***${element.sect.getTitle()}*** ${element.sect.section_date}\n\n${element.sect.getText().replaceAll(re, ("[$1(####_"+ this.entry_number + "_fn_>>$1<<)"))}\n\n`).replaceAll(">>[", "").replaceAll("]<<", "");
       } 
     );
 
-
-
     let footnote_text = "";
     this.childFootnoteSignal()?.getText().forEach(element => {
-      footnote_text = footnote_text.concat(`#### Fn ${element.id}: ${element.content}\n\n`);
+      footnote_text = footnote_text.concat(`#### ${this.entry_number} Fn\n${element.id}${element.content}\n\n`);
       } 
     );
 
