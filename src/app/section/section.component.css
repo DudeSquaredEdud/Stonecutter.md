@@ -18,11 +18,14 @@ h2{
     padding-left: 10px;
     margin-top: 5px;
     margin-bottom: 5px;
-    margin-left: 5%;
-    margin-right: 5%;
     border-radius: 10px;
   }
-
+  section.current{
+    outline: auto;
+    filter: brightness(1.013);
+    outline-color: rgba(175, 188, 190, 0.317);
+  }
+  
   .contentText{
     color: #353637;
     margin-left: 10px;

@@ -3,3 +3,17 @@
 body{
     margin: 0px;
   }
+
+
+  .dynamic_page_width {
+    max-width: 800px;
+    min-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media screen and (width <= 1000px){
+    .dynamic_page_width {
+      margin-left: 10vw;
+      margin-right: 10vw;
+    }
+  }

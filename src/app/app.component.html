@@ -3,7 +3,7 @@
     <div class="entryNum" contenteditable="true">{{entry_number}}</div>
     <h1 id="postTitle" spellcheck="false" contenteditable="true">{{title}}</h1>
   </header>
-  <section id="SECTION_CONTAINER">
+  <section id="SECTION_CONTAINER" class="dynamic_page_width">
     @for (i of section_count_range; track i){
       <app-section [unique_id]="i" />
     }

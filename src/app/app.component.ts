@@ -60,8 +60,10 @@ export class AppComponent {
   @HostListener('document:click', ['$event'])
   select_section(event: MouseEvent){
     if (event.target instanceof Element) {
+      document.querySelector("section.current")?.classList.remove("current");
       let target_id = event.target.getAttribute("sec_id");
         this.selected_section = target_id!; 
+        document.querySelector("section[sec_id=\"" + target_id! + "\"]")?.classList.add("current");
      }
   }
 
