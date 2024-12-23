@@ -11,8 +11,8 @@ import { FootnotesComponent } from './footnotes/footnotes.component';
 })
 export class AppComponent {
   // Title & footnotes
-  title = 'Stonecutter.md, Part 2';
-  entry_number = "0006";
+  title = 'New Post';
+  entry_number = "0000";
 
   // Sections
   section_count = 1;
@@ -103,12 +103,13 @@ export class AppComponent {
 
     let footnote_text = "";
     this.childFootnoteSignal()?.getText().forEach(element => {
-      footnote_text = footnote_text.concat(`#### ${this.entry_number} Fn\n${element.id}${element.content}\n\n`);
+      footnote_text = footnote_text.concat(`#### ${this.entry_number} Fn ${element.id}\n\n${element.content}\n\n`);
       } 
     );
 
-    console.log(
-      `## ${this.entry_number}: ${this.title}\n---\n`
+    
+  navigator.clipboard.writeText(
+      `## ${document.getElementById("entry_number")?.innerHTML}: ${document.getElementById("postTitle")?.innerHTML}\n---\n`
       +"\n"+
       section_texts
       +"\n"+
@@ -117,4 +118,30 @@ export class AppComponent {
       footnote_text
     )
     }
+
+  theme = 0;
+  @HostListener('document:keydown.control.d', ['$event'])
+  toggle_dark(e:any){
+    e.preventDefault();
+    let bodyclasses = document.getElementsByTagName("body")[0].classList;
+    this.theme = (this.theme+1)%3;
+    bodyclasses.remove("dark");
+    bodyclasses.remove("bloody");
+
+    switch(this.theme){
+      case 1: 
+      bodyclasses.add("dark");
+      console.log("Theme is dark.");
+      break;
+
+      case 2:
+      bodyclasses.add("bloody");
+      console.log("Theme is bloody.");
+      break;
+
+      default:
+      console.log("Theme is light.");
+      break;
+    }
+  }
 }

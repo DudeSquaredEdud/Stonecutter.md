@@ -17,3 +17,71 @@ body{
       margin-right: 10vw;
     }
   }
+
+body{
+  background-color: #ffffff;
+  --h1-color: #000000
+  --h2-color: #2f2f2f;
+  --section-background-color: rgb(248, 248, 248);
+  --contentText-color: #353637;
+  --textarea-background-color: rgb(248, 248, 248);
+  --footer-background-color: #f0f0f0;
+  --entryNum-color: #5d5d5d;
+  --header-background-color: rgb(241, 241, 241);
+}
+
+
+body.dark{
+  --header-background-color: rgb(48, 48, 48);
+  background-color: #272626;
+  --h1-color: #acacac;
+  --h2-color: #868686;
+  --h2-deleted-color: #949494;
+
+  --section-background-color: rgb(28, 28, 28);
+  --section-deleted-background-color: rgb(76, 76, 76);
+  --section-current-outline-color: rgb(73, 88, 91);
+
+  --contentText-color: #cfcfcf;
+  --contentText-deleted-color: #8d8d8d;
+
+  --textarea-background-color: rgb(248, 248, 248);
+
+  --footer-background-color: #333333;
+
+  --entryNum-color: #7b7b7b;
+
+
+  p{
+    color:var(--contentText-color);
+  }
+
+}
+
+
+body.bloody{
+  --header-background-color: rgb(60, 33, 33);
+  background-color: #2c1c1c;
+  --h1-color: hsl(0, 39%, 44%);
+  --h2-color: #976060;
+  --h2-deleted-color: #6b4040;
+
+  --section-background-color: rgb(90, 51, 51);
+  --section-deleted-background-color: rgb(73, 35, 35);
+  --section-current-outline-color: rgb(73, 88, 91);
+
+  --contentText-color: #cd8686;
+  --contentText-deleted-color: #9d6e6e;
+
+  --textarea-background-color: rgb(248, 248, 248);
+
+  --footer-background-color: #3d1c1c;
+
+  --entryNum-color: #7b7b7b;
+
+
+  p{
+    color:var(--contentText-color);
+  }
+
+}

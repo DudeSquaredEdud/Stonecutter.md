@@ -7,12 +7,12 @@
 
   h1{
     margin-top: 0px;
-    color: #000000;
+    color: var(--h1-color);
     text-align: center;
   }
 
   header{
-    background-color: rgb(241, 241, 241);
+    background-color: var(--header-background-color);
     height:fit-content;
     width:auto;
     padding: 10px;
@@ -20,7 +20,7 @@
 
   .entryNum{
     text-align: center;
-    color: #5d5d5d;
+    color: var(--entryNum-color);
     font-style: italic;
   }
 
@@ -31,14 +31,14 @@
     font-size: small;
     font-style: bold;
     
+    background-color: var(--footer-background-color);
+    width: 100vw;
+    z-index: 1000;
+
     .right{
       text-align: right;
     }
     *{
       width:50%;
     }
-  
-    background-color: #f0f0f0;
-    width: 100vw;
-    z-index: 1000;
   }
