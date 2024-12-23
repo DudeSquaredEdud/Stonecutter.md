@@ -30,8 +30,9 @@ export class SectionComponent{
   }
 
   updateText(){
-    this.section_title = document.querySelectorAll("h2[sec_id=\""+this.unique_id+"\"]")[0].innerHTML;
-    this.section_textcontent = document.querySelectorAll("p.contentText[sec_id=\""+this.unique_id+"\"]")[0].innerHTML;
+    // beautiful mess.
+    this.section_title = (<HTMLInputElement>document.querySelectorAll("h2[sec_id=\""+this.unique_id+"\"]")[0]).innerText;
+    this.section_textcontent = (<HTMLInputElement>document.querySelectorAll("p.contentText[sec_id=\""+this.unique_id+"\"]")[0]).innerText;
   }
 
   getTitle(){
