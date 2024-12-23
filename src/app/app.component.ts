@@ -1,4 +1,4 @@
-import { Component, computed, HostBinding, HostListener, viewChildren, ChangeDetectorRef, viewChild } from '@angular/core';
+import { Component, computed, HostBinding, HostListener, viewChildren, ChangeDetectorRef, viewChild, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SectionComponent } from './section/section.component';
 import { FootnotesComponent } from './footnotes/footnotes.component';
@@ -9,9 +9,27 @@ import { FootnotesComponent } from './footnotes/footnotes.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  saveState = {
+    post_number:  "",
+    title:        "",
+    sections_component:     "",
+    footnotes_component:    ""
+  };
+
+  // save!
+  ngOnInit(){
+    this.saveState = JSON.parse(localStorage.getItem('saveState')!);
+    console.log("State Retrieved!");
+    this.title = this.saveState.title ?? "New Post";
+    this.entry_number = this.saveState.post_number ?? "0000";
+    this.childSectionsSignal = JSON.parse(this.saveState.sections_component);
+    this.childFootnoteSignal = JSON.parse(this.saveState.footnotes_component);
+
+  }
+
   // Title & footnotes
-  title = 'New Post';
+  title = "New Post";
   entry_number = "0000";
 
   // Sections
@@ -32,6 +50,25 @@ export class AppComponent {
   childFootnoteSignal = viewChild(FootnotesComponent);
 
   selected_section: string | null = "0";
+
+
+
+  @HostListener('document:keydown.control.s', ['$event'])
+  getSaveState(e:any){
+    e.preventDefault();
+    console.log("Saved!");
+    this.entry_number = document.getElementById("entry_number")?.innerHTML!;
+    this.title = document.getElementById("postTitle")?.innerHTML!;
+    this.saveState = {
+      post_number:  this.entry_number,
+      title:        this.title,
+      sections_component:     JSON.stringify(this.childSectionsSignal()),
+      footnotes_component:    JSON.stringify(this.childFootnoteSignal())
+    };
+    console.log(this.saveState);
+    localStorage.setItem('saveState', JSON.stringify(this.saveState));
+  }
+
 
   // Create a new section
   @HostListener('document:keydown.control.enter', ['$event'])
@@ -90,7 +127,7 @@ export class AppComponent {
   }
 
 
-  @HostListener('document:keydown.control.s', ['$event'])
+  @HostListener('document:keydown.control.e', ['$event'])
   export_text(e: any){
     e.preventDefault();
     this.entry_number = document.getElementById("entry_number")?.innerHTML!;
