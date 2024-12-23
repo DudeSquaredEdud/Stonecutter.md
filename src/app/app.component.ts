@@ -93,11 +93,13 @@ export class AppComponent {
   @HostListener('document:keydown.control.s', ['$event'])
   export_text(e: any){
     e.preventDefault();
+    this.entry_number = document.getElementById("entry_number")?.innerHTML!;
+    this.title = document.getElementById("postTitle")?.innerHTML!;
     let section_texts = "";
     let re = new RegExp("(\[[0-9]+\])", "g");
     this.childSections().forEach(element => {
       // this is an abomination. 
-      section_texts = section_texts.concat(`***${element.sect.getTitle()}*** ${element.sect.section_date}\n\n${element.sect.getText().replaceAll(re, ("[$1(####_"+ this.entry_number + "_fn_>>$1<<)"))}\n\n`).replaceAll(">>[", "").replaceAll("]<<", "");
+      section_texts = section_texts.concat(`***${element.sect.getTitle()}*** ${element.sect.section_date}\n\n${element.sect.getText().replaceAll(re, ("[$1(####_"+ this.entry_number + "_fn_>>$1<<)]"))}\n\n`).replaceAll(">>[", "").replaceAll("]<<", "");
       } 
     );
 
@@ -107,16 +109,18 @@ export class AppComponent {
       } 
     );
 
+    let copy_text = `## ${this.entry_number}: ${this.title}\n---\n`
+    +"\n"+
+    section_texts
+    +"\n";
     
-  navigator.clipboard.writeText(
-      `## ${document.getElementById("entry_number")?.innerHTML}: ${document.getElementById("postTitle")?.innerHTML}\n---\n`
-      +"\n"+
-      section_texts
-      +"\n"+
-      "### Footnotes"
-      +"\n"+
-      footnote_text
-    )
+    if (footnote_text.trim() != "")
+      copy_text.concat( 
+        "### Footnotes"
+        +"\n"+
+        footnote_text);
+
+  navigator.clipboard.writeText(copy_text);
     }
 
   theme = 0;
